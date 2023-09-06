@@ -23,6 +23,10 @@ def get_db():
 
 @app.get("/", response_model=List[schemas.Event])
 def get_events(checked: bool | None = None, event_type: schemas.EventType = schemas.EventType.alls, db: Session = Depends(get_db)):
+    """
+    obtener una lista de eventos. Puedes filtrar los eventos por su estado de "checked" y su tipo de evento. 
+    Si no se proporciona ningún filtro o query paramenter, se devolverán todos los eventos.
+    """
     event_filter = event_type.value if event_type.value != "all" else "%" 
     checked_filter = checked
     if checked is None:
@@ -34,6 +38,10 @@ def get_events(checked: bool | None = None, event_type: schemas.EventType = sche
 
 @app.get("/event/{event_id}", response_model=schemas.Event)
 def get_event(event_id: int, db: Session = Depends(get_db)):
+    """
+    obtener un evento específico por su ID. Si el evento no existe, devuelve un error 404. 
+    Si el evento no está marcado como "checked", lo marca como "checked" y actualiza el campo "work" (requiere o no requiere gestión) según su tipo.
+    """
     event = db.query(models.Event).get(event_id)
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
@@ -50,7 +58,10 @@ def get_event(event_id: int, db: Session = Depends(get_db)):
 
 @app.post("/create_event", response_model=schemas.Event)
 def create_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
-    print(event)
+    """
+    crea un nuevo evento. 
+    Se espera un objeto JSON que contiene los detalles del evento, como nombre, tipo, descripción y fecha. Luego, el evento se agrega a la base de datos y se devuelve como respuesta.
+    """
     new_event = models.Event(
         name=event.name,
         type=event.type.value,
@@ -65,7 +76,8 @@ def create_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
 @app.patch("/check-event/{event_id}", response_model=schemas.Event)
 def check_event(event_id: int, edit_data: schemas.EventEdit, db: Session = Depends(get_db)):
     """
-    Event Update
+    actualiza un evento existente. 
+    Se espera un objeto JSON con los campos que se desean actualizar. Luego, se aplican las actualizaciones al evento y se devuelve como respuesta.
     """
     event = db.query(models.Event).get(event_id)
     if not event:
@@ -77,8 +89,12 @@ def check_event(event_id: int, edit_data: schemas.EventEdit, db: Session = Depen
     return event
 
 
-@app.delete("/del/{event_id}", response_model=dict)
+@app.delete("/del/{event_id}", response_class=dict)
 def delete_event(event_id: int, db: Session = Depends(get_db)):
+    """
+    permite eliminar un evento por su id. 
+    Si el evento no existe, se devuelve un error 404. Si se elimina con éxito, se devuelve un mensaje de confirmación.
+    """
     event_to_delete = db.query(models.Event).get(event_id)
     if not event_to_delete:
         raise HTTPException(status_code=404, detail="Event not found")
