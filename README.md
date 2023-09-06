@@ -1,4 +1,4 @@
-* README
+# README
 
 ** INSTALACIÓN
 La aplicación se puede ejecutar simplemente creado la imagen de docker y corriendo el container. 
@@ -6,8 +6,11 @@ No hay necesidad de instalar paquetes o dependencias.
 Tener Docker instalado en la máquina. Puede descargar Docker en https://www.docker.com/get-started.
 
 *** En la terminal, navegando al directurio en dónde se clonó el proyecto, ejecutar:
+
 docker build -t nombre_de_la_imagen .
+
 docker run -d -p 8000:8000 nombre_de_la_imagen
+
 
 La aplicación correrá automaticamente en http://localhost:8000/
 
