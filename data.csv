@@ -1,0 +1,10 @@
+name,type,description,event_date
+Comp A,commercial,Lanzamiento de producto,2023-09-10
+Comp B,service,Mantenimiento de sistemas,2023-09-15
+Comp C,online_meeting,Reunión de equipo,2023-09-20
+Comp D,other,Otro evento,2023-09-25
+Comp E,commercial,Promoción de ventas,2023-10-01
+Comp F,service,Servicio al cliente,2023-10-05
+Comp G,online_meeting,Presentación en línea,2023-10-10
+Comp H,commercial,Lanzamiento de campana,2023-10-15
+Comp I,other,Evento especial,2023-10-20

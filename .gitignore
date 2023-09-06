@@ -1,0 +1,6 @@
+__pycache__/
+app/__pycache__/
+int_env/
+Discovery.md
+Spacefile
+sql_app.db
