@@ -23,6 +23,9 @@ docker stop <ID_DEL_CONTENEDOR>
 docker rm <ID_DEL_CONTENEDOR>
 
 
+## DOMENTACIÓN
+La API está docuemtnada con swagger en <b>http://localhost:8000/docs</b>
+
 
 ## PAQUETES
 Utilicé FastAPI como backend framwork y sqlalchemy como ORM.
