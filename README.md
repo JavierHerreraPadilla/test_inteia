@@ -14,22 +14,25 @@ docker run -d -p 8000:8000 nombre_de_la_imagen
 
 La aplicación correrá automaticamente en http://localhost:8000/
 
+
 ### Para detener y borrar el container
+
 En la termninal:
+
 docker stop <ID_DEL_CONTENEDOR>
 docker rm <ID_DEL_CONTENEDOR>
 
 
 
-** PAQUETES
+## PAQUETES
 Utilicé FastAPI como backend framwork y sqlalchemy como ORM.
 
 
-** CONFIGURACIÓN
+## CONFIGURACIÓN
 La app está configurada para correr en el container de docker.
 
 
-
+## RUTAS
 Ruta: / - Obtener Eventos
 
 ** Método: GET
