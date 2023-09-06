@@ -89,7 +89,7 @@ def check_event(event_id: int, edit_data: schemas.EventEdit, db: Session = Depen
     return event
 
 
-@app.delete("/del/{event_id}", response_class=dict)
+@app.delete("/del/{event_id}", response_model=dict)
 def delete_event(event_id: int, db: Session = Depends(get_db)):
     """
     permite eliminar un evento por su id. 
