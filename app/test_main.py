@@ -60,7 +60,7 @@ def test_create_event_success():
         "event_date": "2023-09-01"
     }
 
-    response = client.post("/create_event", json=event_payload)
+    response = client.post("/create-event", json=event_payload)
     
     assert response.status_code == 200, f"Not valid payload Status-{response.status_code}: {response.json()}"
     
