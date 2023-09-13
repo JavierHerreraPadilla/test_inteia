@@ -20,7 +20,7 @@ def post_data(event: dict):
     """
     generates a post request 
     """
-    response = requests.post(post_url,  json=event)
+    response = requests.post(post_url, json=event)
     return response
 
 
@@ -34,6 +34,7 @@ def load_and_post():
         for row in reader:
             r = post_data(row)
             print(r.status_code)
+        print(r.json())
 
 
 def delete_events():
@@ -48,3 +49,4 @@ def delete_events():
 
 # dict e serves to make an incorrect post request. Incorrect 'type' and missing date
 e = {'name': 'Comp A', 'type': 'comm', 'description': 'Lanzamiento de producto'}
+

@@ -27,7 +27,6 @@ def get_events(*, checked: bool | None = None, event_type: schemas.EventType = s
     obtener una lista de eventos. Puedes filtrar los eventos por su estado de "checked" y su tipo de evento. 
     Si no se proporciona ningún filtro o query paramenter, se devolverán todos los eventos.
     """
-    print("*/*/-*/*-/*-/-/", event_type)
     event_filter = event_type.value if event_type.value != None else "%" 
     checked_filter = checked
     if checked is None:
