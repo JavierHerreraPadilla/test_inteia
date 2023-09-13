@@ -3,7 +3,6 @@ import csv
 
 # STATICLY LOADING SOME DATA
 
-
 # This script loads data from a csv file and generatets a post request to the API using his data 
 # Includes a post_data function that sends a post request to the end point
 # Includes a load_and_post function that takes load csv data from a file called data.csv and posts all the loaded data to the end point
@@ -12,7 +11,7 @@ import csv
 
 
 url="http://127.0.0.1:8000/"
-post_url = "http://127.0.0.1:8000/create_event"
+post_url = "http://127.0.0.1:8000/create-event"
 
 
 def post_data(event: dict):
