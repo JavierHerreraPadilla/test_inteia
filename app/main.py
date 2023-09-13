@@ -82,7 +82,8 @@ def check_event(event_id: int, edit_data: schemas.EventEdit, db: Session = Depen
     event = db.query(models.Event).get(event_id)
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
-    for attr, value in edit_data.dict(exclude_unset=True).items():
+    
+    for attr, value in edit_data.model_dump(exclude_unset=True).items():
         setattr(event, attr, value)
         db.commit()
         event = db.query(models.Event).get(event_id)

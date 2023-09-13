@@ -13,3 +13,5 @@ class Event(Base):
     event_date = Column(DATE, default=dt.now().date, index=True)
     checked = Column(Boolean, default=False, index=True)
     work = Column(Boolean, nullable=True, default=None, index=True)
+
+

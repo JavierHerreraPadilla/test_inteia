@@ -36,14 +36,14 @@ def load_and_post():
             print(r.status_code)
 
 
-def delete_data():
+def delete_events():
     """
     Deletes every single event recorded in the database
     """
-    data = len(requests.get(url).json())
-    for i in range(1, data + 1):
-        r = requests.delete(url+"del/"+f"{i}")
-        print(r.status_code)
+    events = requests.get(url).json()
+    for event in events:
+        r = requests.delete(url+"del/"+str(event['id']))
+        print(event['name'], "delete response:", r.status_code)
 
 
 # dict e serves to make an incorrect post request. Incorrect 'type' and missing date

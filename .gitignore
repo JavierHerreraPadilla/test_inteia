@@ -4,3 +4,5 @@ int_env/
 Discovery.md
 Spacefile
 sql_app.db
+events-db.sqlite3
+events-db.db
