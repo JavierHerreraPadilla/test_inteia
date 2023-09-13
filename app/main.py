@@ -22,12 +22,13 @@ def get_db():
 
 
 @app.get("/", response_model=List[schemas.Event])
-def get_events(checked: bool | None = None, event_type: schemas.EventType = schemas.EventType.alls, db: Session = Depends(get_db)):
+def get_events(*, checked: bool | None = None, event_type: schemas.EventType = schemas.EventType.alls, db: Session = Depends(get_db)):
     """
     obtener una lista de eventos. Puedes filtrar los eventos por su estado de "checked" y su tipo de evento. 
     Si no se proporciona ningún filtro o query paramenter, se devolverán todos los eventos.
     """
-    event_filter = event_type.value if event_type.value != "all" else "%" 
+    print("*/*/-*/*-/*-/-/", event_type)
+    event_filter = event_type.value if event_type.value != None else "%" 
     checked_filter = checked
     if checked is None:
         events = db.query(models.Event).filter(models.Event.type.like(event_filter)).all()
@@ -56,7 +57,7 @@ def get_event(event_id: int, db: Session = Depends(get_db)):
     return event
 
 
-@app.post("/create_event", response_model=schemas.Event)
+@app.post("/create-event", response_model=schemas.Event)
 def create_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
     """
     crea un nuevo evento. 
@@ -73,8 +74,8 @@ def create_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
     return new_event
 
 
-@app.patch("/check-event/{event_id}", response_model=schemas.Event)
-def check_event(event_id: int, edit_data: schemas.EventEdit, db: Session = Depends(get_db)):
+@app.patch("/edit-event/{event_id}", response_model=schemas.Event)
+def edit_event(event_id: int, edit_data: schemas.EventEdit, db: Session = Depends(get_db)):
     """
     actualiza un evento existente. 
     Se espera un objeto JSON con los campos que se desean actualizar. Luego, se aplican las actualizaciones al evento y se devuelve como respuesta.
@@ -85,8 +86,9 @@ def check_event(event_id: int, edit_data: schemas.EventEdit, db: Session = Depen
     
     for attr, value in edit_data.model_dump(exclude_unset=True).items():
         setattr(event, attr, value)
-        db.commit()
-        event = db.query(models.Event).get(event_id)
+        db.flush()
+    db.commit()
+    event = db.query(models.Event).get(event_id)
     return event
 
 

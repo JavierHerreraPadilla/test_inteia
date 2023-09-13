@@ -12,8 +12,7 @@ class EventType(Enum):
     service = "service"
     online_meeting = "online_meeting"
     other = "other"
-    alls = "all"
-
+    alls = None # all events
 
 class EventCreate(BaseModel):
     name: str
